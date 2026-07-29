@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0f172a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="Offline gamified academy: from beginner to pro in Pharma GxP IT, software validation (GAMP 5), data integrity (ALCOA+), networking, cloud and security.">
+  <title>Pharma GxP IT Academy</title>
+
+  <!-- Critical CSS so the app never shows as a blank white page if the stylesheet is slow or missing -->
+  <style>
+    :root {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --accent: #0ea5e9;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --border: #334155;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      min-height: 100%;
+      background: #0f172a !important;
+      color: #f1f5f9 !important;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      line-height: 1.5;
+    }
+    body { display: flex; flex-direction: column; min-height: 100vh; }
+    a { color: #0ea5e9; text-decoration: none; }
+    .app-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+      border-bottom: 1px solid #334155;
+      padding: 0.75rem 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 700;
+      color: #f1f5f9 !important;
+      text-decoration: none !important;
+    }
+    .logo-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      overflow: hidden;
+      background: #0ea5e9;
+      flex-shrink: 0;
+    }
+    .logo-icon img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .header-stats { display: flex; flex-wrap: wrap; gap: 0.5rem; font-size: 0.85rem; }
+    .stat-pill {
+      background: #1e293b;
+      padding: 0.3rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid #334155;
+      color: #f1f5f9;
+    }
+    .nav-tabs { display: flex; flex-wrap: wrap; gap: 0.25rem; background: #1e293b; padding: 0.3rem; border-radius: 10px; }
+    .nav-tab {
+      padding: 0.45rem 0.85rem;
+      border: none;
+      background: transparent;
+      color: #94a3b8;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .nav-tab.active { background: #0ea5e9; color: #fff; }
+    .app-main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 1rem;
+      gap: 1rem;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    @media (min-width: 901px) {
+      .app-main { flex-direction: row; }
+      .sidebar { width: 280px; flex-shrink: 0; }
+    }
+    .card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+    }
+    .card-title { font-weight: 600; margin-bottom: 0.5rem; }
+    #css-fail {
+      display: none;
+      margin: 1rem;
+      padding: 1rem;
+      background: #7f1d1d;
+      border-radius: 10px;
+      color: #fecaca;
+      font-size: 0.9rem;
+    }
+  </style>
+
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="css/styles.css" id="main-css">
+  <link rel="icon" type="image/png" sizes="192x192" href="assets/icon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+</head>
+<body>
+  <div id="css-fail">
+    <strong>Stylesheet did not load.</strong><br>
+    You are probably opening the wrong URL or the <code>css/</code> folder is missing on the server.<br>
+    Use your <strong>GitHub Pages</strong> URL (…github.io/…/), not the raw GitHub file page.
+  </div>
+
+  <header class="app-header">
+    <a href="#" class="logo" onclick="try{setView('dashboard')}catch(e){}; return false;">
+      <div class="logo-icon"><img src="assets/icon-192.png" alt=""></div>
+      <span>Pharma GxP IT Academy</span>
+    </a>
+    <div class="header-stats">
+      <div class="stat-pill" id="online-status" title="Connection status">…</div>
+      <div class="stat-pill">⭐ XP <span class="value" id="header-xp">0</span></div>
+      <div class="stat-pill">Level <span class="value" id="header-level">Beginner</span></div>
+    </div>
+    <nav class="nav-tabs">
+      <button class="nav-tab active" data-view="dashboard" onclick="try{setView('dashboard')}catch(e){}">Dashboard</button>
+      <button class="nav-tab" data-view="achievements" onclick="try{setView('achievements')}catch(e){}">Achievements</button>
+      <button class="nav-tab" data-view="settings" onclick="try{setView('settings')}catch(e){}">Settings</button>
+    </nav>
+  </header>
+
+  <main class="app-main">
+    <aside class="sidebar">
+      <div class="card">
+        <div class="card-title">Modules</div>
+        <div id="module-list"></div>
+      </div>
+    </aside>
+    <section class="content-area" id="content-area">
+      <div class="card" style="color:#94a3b8">Loading academy…</div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <script>
+    // Detect missing CSS (common on wrong GitHub URL or incomplete upload)
+    (function () {
+      var link = document.getElementById('main-css');
+      if (!link) return;
+      link.onerror = function () {
+        var el = document.getElementById('css-fail');
+        if (el) el.style.display = 'block';
+      };
+      // If stylesheet never applies body background from full CSS, still ok via critical CSS
+      setTimeout(function () {
+        try {
+          var bg = getComputedStyle(document.body).backgroundColor;
+          // if somehow still white-ish and sheet failed
+        } catch (e) {}
+      }, 2000);
+    })();
+  </script>
+  <script src="js/content.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
