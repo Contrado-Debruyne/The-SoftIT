@@ -264,6 +264,26 @@ function renderDashboard() {
   $('#content-area').innerHTML = html;
 }
 
+
+function renderModuleStrip() {
+  const el = document.getElementById('module-strip');
+  if (!el || typeof CURRICULUM === 'undefined') return;
+  el.innerHTML = CURRICULUM.modules.map((m, i) => {
+    const unlocked = isModuleUnlocked(i);
+    const done = state.completedModules.includes(m.id);
+    const active = state.currentModuleId === m.id;
+    const short = m.title.length > 22 ? m.title.slice(0, 20) + '…' : m.title;
+    const click = unlocked
+      ? `openModule('${m.id}')`
+      : `showToast('Complete previous module first','error')`;
+    return `<button type="button" class="module-chip ${active ? 'active' : ''} ${done ? 'completed' : ''} ${!unlocked ? 'locked' : ''}"
+      onclick="${click}" ${!unlocked ? 'disabled' : ''}>
+      <span class="chip-num">${done ? '•' : (i + 1)}</span>
+      <span class="chip-label">${short}</span>
+    </button>`;
+  }).join('');
+}
+
 function renderModulesSidebar() {
   const list = $('#module-list');
   list.innerHTML = CURRICULUM.modules.map((m, i) => {
@@ -601,6 +621,7 @@ function updateSidebarVisibility() {
 
 function render() {
   renderHeader();
+  renderModuleStrip();
   updateSidebarVisibility();
   if (currentView === 'module' || currentView === 'lesson' || currentView === 'quiz') {
     renderModulesSidebar();

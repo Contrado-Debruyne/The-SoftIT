@@ -434,7 +434,7 @@ const CURRICULUM = {
     { id: 'capstone-champion', title: 'Capstone Champion', description: 'Pass Capstone Exam (≥80%)', icon: 'CA', condition: (s) => (s.quizScores['m8-quiz'] || 0) >= 80 },
     { id: 'xp-1000', title: 'Knowledge Seeker', description: 'Reach 1,000 XP', icon: '1K', condition: (s) => s.xp >= 1000 },
     { id: 'xp-5000', title: 'Domain Expert', description: 'Reach 5,000 XP', icon: '5K', condition: (s) => s.xp >= 5000 },
-    { id: 'all-modules', title: 'Full Spectrum', description: 'Complete all 11 modules', icon: 'FS', condition: (s) => s.completedModules.length >= 11 },
+    { id: 'all-modules', title: 'Esztike Queen Level', description: 'Complete all 11 modules', icon: 'FS', condition: (s) => s.completedModules.length >= 11 },
     { id: 'perfect-quiz', title: 'Perfect Score', description: 'Score 100% on any quiz', icon: '100', condition: (s) => Object.values(s.quizScores || {}).some(v => v === 100) },
     { id: 'streak-3', title: 'Consistent Learner', description: 'Activity on 3 different days', icon: '3D', condition: (s) => (s.activityDays || []).length >= 3 }
   ],
