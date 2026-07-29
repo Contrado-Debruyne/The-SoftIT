@@ -1,0 +1,14 @@
+{
+  "name": "Pharma GxP IT Academy",
+  "short_name": "GxP Academy",
+  "description": "Offline gamified path from beginner to pro in Pharma GxP IT & validation.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f7f3ee",
+  "theme_color": "#c2410c",
+  "orientation": "any",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
