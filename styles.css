@@ -1,20 +1,20 @@
 /* Pharma GxP IT Academy — Apple-inspired warm light design */
 :root {
-  --bg: #f7f3ee;
-  --bg-elevated: #fffcf8;
+  --bg: #f9f7f4;
+  --bg-elevated: #fffcfa;
   --bg-card: #ffffff;
-  --bg-soft: #f0ebe4;
-  --bg-hover: #e8e2d9;
+  --bg-soft: #f1eeea;
+  --bg-hover: #e9e5e0;
   --text: #1c1917;
   --text-secondary: #57534e;
   --text-muted: #a8a29e;
-  --accent: #c2410c;
-  --accent-soft: #fff7ed;
-  --accent-border: #fdba74;
-  --success: #15803d;
-  --success-soft: #f0fdf4;
-  --warning: #b45309;
-  --danger: #b91c1c;
+  --accent: #5c6b7a;
+  --accent-soft: #eef2f5;
+  --accent-border: #c5d0db;
+  --success: #3d7a5a;
+  --success-soft: #eef6f1;
+  --warning: #9a7b4f;
+  --danger: #9a6b6b;
   --border: #e7e5e4;
   --border-strong: #d6d3d1;
   --shadow-sm: 0 1px 2px rgba(28, 25, 23, 0.04);
@@ -163,8 +163,8 @@ a:hover { text-decoration: underline; }
   font-family: inherit; transition: transform 0.15s, background 0.15s;
 }
 .btn:active { transform: scale(0.97); }
-.btn-primary { background: var(--accent); color: #fff; box-shadow: 0 2px 8px rgba(194, 65, 12, 0.25); }
-.btn-primary:hover { background: #9a3412; }
+.btn-primary { background: var(--accent); color: #fff; box-shadow: 0 2px 8px rgba(92, 107, 122, 0.22); }
+.btn-primary:hover { background: #4a5560; }
 .btn-secondary { background: var(--bg-card); color: var(--text); border: 1px solid var(--border-strong); }
 .btn-secondary:hover { background: var(--bg-soft); }
 .btn-success { background: var(--success); color: #fff; }
@@ -186,7 +186,7 @@ a:hover { text-decoration: underline; }
 .quiz-option:hover { border-color: var(--accent-border); background: var(--accent-soft); }
 .quiz-option.selected { border-color: var(--accent); background: var(--accent-soft); }
 .quiz-option.correct { border-color: var(--success); background: var(--success-soft); }
-.quiz-option.incorrect { border-color: var(--danger); background: #fef2f2; }
+.quiz-option.incorrect { border-color: var(--danger); background: #f7f2f2; }
 .quiz-result { text-align: center; padding: 2rem 1rem; }
 .quiz-score { font-size: 3.25rem; font-weight: 700; letter-spacing: -0.04em; color: var(--accent); margin: 0.75rem 0; }
 .achievements-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.85rem; }
@@ -204,10 +204,10 @@ a:hover { text-decoration: underline; }
 .stat-card .big-number { font-size: 2rem; font-weight: 700; letter-spacing: -0.03em; color: var(--accent); line-height: 1.1; }
 .stat-card .label { color: var(--text-secondary); font-size: 0.8rem; margin-top: 0.3rem; font-weight: 500; }
 .progress-bar { height: 6px; background: var(--bg-soft); border-radius: var(--radius-pill); overflow: hidden; margin: 0.65rem 0 0.25rem; }
-.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #ea580c); border-radius: var(--radius-pill); transition: width 0.4s ease; }
+.progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), #7a8fa3); border-radius: var(--radius-pill); transition: width 0.4s ease; }
 .cert-badge {
   display: inline-flex; align-items: center; gap: 0.35rem;
-  background: linear-gradient(135deg, #c2410c, #ea580c); color: #fff;
+  background: linear-gradient(135deg, #5c6b7a, #7a8fa3); color: #fff;
   padding: 0.35rem 0.8rem; border-radius: var(--radius-pill); font-size: 0.8rem; font-weight: 600; margin: 0.2rem;
 }
 .settings-section { margin-bottom: 1rem; }
@@ -226,7 +226,7 @@ a:hover { text-decoration: underline; }
 .toast.error { background: var(--danger); }
 .hidden { display: none !important; }
 #css-fail {
-  display: none; margin: 1rem; padding: 1rem; background: #fef2f2; border: 1px solid #fecaca;
+  display: none; margin: 1rem; padding: 1rem; background: #f7f2f2; border: 1px solid #e8d5d5;
   border-radius: var(--radius-sm); color: var(--danger); font-size: 0.9rem;
 }
 .key-box img { max-width: 100%; border-radius: 12px; }

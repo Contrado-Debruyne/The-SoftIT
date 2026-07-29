@@ -1,5 +1,5 @@
 /**
- * Pharma GxP IT Academy – Application Logic
+ * The SoftIT Academy – Application Logic
  * Offline-first, autosave to localStorage, backup/restore, gamification.
  */
 
@@ -210,7 +210,7 @@ function renderDashboard() {
   let html = `
     <div class="lesson-header">
       <h1>Dashboard</h1>
-      <p class="lesson-meta">Track your journey from beginner to pro in Pharma GxP IT &amp; Validation</p>
+      <p class="lesson-meta">Track your journey from beginner to pro in GxP IT &amp; Validation</p>
     </div>
     <div class="dashboard-grid">
       <div class="card stat-card">
@@ -571,9 +571,22 @@ function renderSettings() {
 }
 
 function setView(view) {
+  if (!view) return;
   currentView = view;
-  $all('.nav-tab').forEach(t => t.classList.toggle('active', t.dataset.view === view));
+  // Highlight the correct tab
+  document.querySelectorAll('.nav-tab').forEach((tab) => {
+    const isActive = tab.getAttribute('data-view') === view;
+    tab.classList.toggle('active', isActive);
+  });
   render();
+  // Jump to top of content (feels like navigating to a section)
+  try {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const main = document.querySelector('.app-main');
+    if (main) main.scrollTop = 0;
+    const area = document.getElementById('content-area');
+    if (area) area.scrollTop = 0;
+  } catch (e) {}
 }
 
 function render() {
