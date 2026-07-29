@@ -421,22 +421,22 @@ const CURRICULUM = {
   ],
 
   achievements: [
-    { id: 'first-lesson', title: 'First Steps', description: 'Complete your first lesson', icon: '🎯', condition: (s) => s.completedLessons.length >= 1 },
-    { id: 'alcoa-master', title: 'ALCOA+ Guardian', description: 'Complete Data Integrity module + pass quiz', icon: '🛡️', condition: (s) => s.completedModules.includes('m2') && (s.quizScores['m2-quiz'] || 0) >= 70 },
-    { id: 'gamp-guru', title: 'GAMP Guru', description: 'Complete GAMP 5 module + pass quiz', icon: '📘', condition: (s) => s.completedModules.includes('m3') && (s.quizScores['m3-quiz'] || 0) >= 70 },
-    { id: 'sdp-craftsman', title: 'SDLC Craftsman', description: 'Complete Software Development Processes module + pass quiz', icon: '⚙️', condition: (s) => s.completedModules.includes('m_sdp') && (s.quizScores['m_sdp-quiz'] || 0) >= 70 },
-    { id: 'csv-proficient', title: 'CSV Practitioner', description: 'Complete CSV module + pass quiz', icon: '✅', condition: (s) => s.completedModules.includes('m4') && (s.quizScores['m4-quiz'] || 0) >= 70 },
-    { id: 'arch-architect', title: 'GxP Architect', description: 'Complete Architecture & Design module + pass quiz', icon: '🏗️', condition: (s) => s.completedModules.includes('m_arch') && (s.quizScores['m_arch-quiz'] || 0) >= 70 },
-    { id: 'network-ninja', title: 'Network Ninja', description: 'Complete Networking module + pass quiz', icon: '🌐', condition: (s) => s.completedModules.includes('m5') && (s.quizScores['m5-quiz'] || 0) >= 70 },
-    { id: 'its-strategist', title: 'IT Strategist', description: 'Complete IT Structures & EA module + pass quiz', icon: '🗂️', condition: (s) => s.completedModules.includes('m_its') && (s.quizScores['m_its-quiz'] || 0) >= 70 },
-    { id: 'cloud-commander', title: 'Cloud Commander', description: 'Complete Cloud module + pass quiz', icon: '☁️', condition: (s) => s.completedModules.includes('m6') && (s.quizScores['m6-quiz'] || 0) >= 70 },
-    { id: 'security-sentinel', title: 'Security Sentinel', description: 'Complete Security module + pass quiz', icon: '🔒', condition: (s) => s.completedModules.includes('m7') && (s.quizScores['m7-quiz'] || 0) >= 70 },
-    { id: 'capstone-champion', title: 'Capstone Champion', description: 'Pass Capstone Exam (≥80%)', icon: '🏆', condition: (s) => (s.quizScores['m8-quiz'] || 0) >= 80 },
-    { id: 'xp-1000', title: 'Knowledge Seeker', description: 'Reach 1,000 XP', icon: '⭐', condition: (s) => s.xp >= 1000 },
-    { id: 'xp-5000', title: 'Domain Expert', description: 'Reach 5,000 XP', icon: '🌟', condition: (s) => s.xp >= 5000 },
-    { id: 'all-modules', title: 'Full Spectrum', description: 'Complete all 11 modules', icon: '🎓', condition: (s) => s.completedModules.length >= 11 },
-    { id: 'perfect-quiz', title: 'Perfect Score', description: 'Score 100% on any quiz', icon: '💯', condition: (s) => Object.values(s.quizScores || {}).some(v => v === 100) },
-    { id: 'streak-3', title: 'Consistent Learner', description: 'Activity on 3 different days', icon: '🔥', condition: (s) => (s.activityDays || []).length >= 3 }
+    { id: 'first-lesson', title: 'First Steps', description: 'Complete your first lesson', icon: '01', condition: (s) => s.completedLessons.length >= 1 },
+    { id: 'alcoa-master', title: 'ALCOA+ Guardian', description: 'Complete Data Integrity module + pass quiz', icon: 'DI', condition: (s) => s.completedModules.includes('m2') && (s.quizScores['m2-quiz'] || 0) >= 70 },
+    { id: 'gamp-guru', title: 'GAMP Guru', description: 'Complete GAMP 5 module + pass quiz', icon: 'G5', condition: (s) => s.completedModules.includes('m3') && (s.quizScores['m3-quiz'] || 0) >= 70 },
+    { id: 'sdp-craftsman', title: 'SDLC Craftsman', description: 'Complete Software Development Processes module + pass quiz', icon: 'SD', condition: (s) => s.completedModules.includes('m_sdp') && (s.quizScores['m_sdp-quiz'] || 0) >= 70 },
+    { id: 'csv-proficient', title: 'CSV Practitioner', description: 'Complete CSV module + pass quiz', icon: 'CV', condition: (s) => s.completedModules.includes('m4') && (s.quizScores['m4-quiz'] || 0) >= 70 },
+    { id: 'arch-architect', title: 'GxP Architect', description: 'Complete Architecture & Design module + pass quiz', icon: 'AR', condition: (s) => s.completedModules.includes('m_arch') && (s.quizScores['m_arch-quiz'] || 0) >= 70 },
+    { id: 'network-ninja', title: 'Network Ninja', description: 'Complete Networking module + pass quiz', icon: 'NW', condition: (s) => s.completedModules.includes('m5') && (s.quizScores['m5-quiz'] || 0) >= 70 },
+    { id: 'its-strategist', title: 'IT Strategist', description: 'Complete IT Structures & EA module + pass quiz', icon: 'IT', condition: (s) => s.completedModules.includes('m_its') && (s.quizScores['m_its-quiz'] || 0) >= 70 },
+    { id: 'cloud-commander', title: 'Cloud Commander', description: 'Complete Cloud module + pass quiz', icon: 'CL', condition: (s) => s.completedModules.includes('m6') && (s.quizScores['m6-quiz'] || 0) >= 70 },
+    { id: 'security-sentinel', title: 'Security Sentinel', description: 'Complete Security module + pass quiz', icon: 'SE', condition: (s) => s.completedModules.includes('m7') && (s.quizScores['m7-quiz'] || 0) >= 70 },
+    { id: 'capstone-champion', title: 'Capstone Champion', description: 'Pass Capstone Exam (≥80%)', icon: 'CA', condition: (s) => (s.quizScores['m8-quiz'] || 0) >= 80 },
+    { id: 'xp-1000', title: 'Knowledge Seeker', description: 'Reach 1,000 XP', icon: '1K', condition: (s) => s.xp >= 1000 },
+    { id: 'xp-5000', title: 'Domain Expert', description: 'Reach 5,000 XP', icon: '5K', condition: (s) => s.xp >= 5000 },
+    { id: 'all-modules', title: 'Full Spectrum', description: 'Complete all 11 modules', icon: 'FS', condition: (s) => s.completedModules.length >= 11 },
+    { id: 'perfect-quiz', title: 'Perfect Score', description: 'Score 100% on any quiz', icon: '100', condition: (s) => Object.values(s.quizScores || {}).some(v => v === 100) },
+    { id: 'streak-3', title: 'Consistent Learner', description: 'Activity on 3 different days', icon: '3D', condition: (s) => (s.activityDays || []).length >= 3 }
   ],
 
   levels: [

@@ -9,8 +9,8 @@
   <meta name="description" content="The SoftIT Academy — offline learning from beginner to pro.">
   <title>The SoftIT Academy</title>
   <style>
-    html,body{background:#f7f3ee;color:#1c1917;font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;margin:0}
-    #css-fail{display:none;margin:1rem;padding:1rem;background:#fef2f2;border-radius:12px;color:#9a6b6b}
+    html,body{background:#f9f7f4;color:#1c1917;font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif;margin:0}
+    #css-fail{display:none;margin:1rem;padding:1rem;background:#f7f2f2;border-radius:12px;color:#9a6b6b}
   </style>
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="styles.css" id="main-css">
@@ -19,6 +19,7 @@
 </head>
 <body>
   <div id="css-fail"><strong>Stylesheet missing.</strong> Upload <code>styles.css</code> next to this file, and open the GitHub Pages URL (not raw GitHub).</div>
+
   <header class="app-header">
     <a href="#" class="logo" onclick="try{setView('dashboard')}catch(e){};return false;">
       <div class="logo-icon"><img src="icon-192.png" alt=""></div>
@@ -26,26 +27,41 @@
     </a>
     <div class="header-stats">
       <div class="stat-pill" id="online-status">…</div>
-      <div class="stat-pill">⭐ XP <span class="value" id="header-xp">0</span></div>
-      <div class="stat-pill">Level <span class="value" id="header-level">Beginner</span></div>
+      <div class="stat-pill stat-xp">
+        <span class="xp-mark" aria-hidden="true"></span>
+        <span class="value" id="header-xp">0</span>
+        <span class="stat-label">XP</span>
+      </div>
+      <div class="stat-pill">
+        <span class="stat-label">Level</span>
+        <span class="value" id="header-level">Beginner</span>
+      </div>
     </div>
-    <nav class="nav-tabs">
-      <button class="nav-tab active" data-view="dashboard" onclick="try{setView('dashboard')}catch(e){}">Dashboard</button>
-      <button class="nav-tab" data-view="achievements" onclick="try{setView('achievements')}catch(e){}">Achievements</button>
-      <button class="nav-tab" data-view="settings" onclick="try{setView('settings')}catch(e){}">Settings</button>
+    <nav class="nav-tabs" role="tablist">
+      <button type="button" class="nav-tab active" data-view="dashboard" onclick="setView('dashboard')">Dashboard</button>
+      <button type="button" class="nav-tab" data-view="achievements" onclick="setView('achievements')">Achievements</button>
+      <button type="button" class="nav-tab" data-view="settings" onclick="setView('settings')">Settings</button>
     </nav>
   </header>
-  <main class="app-main">
-    <aside class="sidebar">
-      <div class="card"><div class="card-title">Modules</div><div id="module-list"></div></div>
-    </aside>
+
+  <main class="app-main" id="app-main">
+    <!-- Content first so Dashboard/etc. appear under the header without scrolling past modules -->
     <section class="content-area" id="content-area">
       <div class="card" style="color:#a8a29e">Loading…</div>
     </section>
+    <aside class="sidebar" id="sidebar">
+      <div class="card">
+        <div class="card-title">Modules</div>
+        <div id="module-list"></div>
+      </div>
+    </aside>
   </main>
+
   <div id="toast" class="toast"></div>
   <script>
-    document.getElementById('main-css').onerror=function(){document.getElementById('css-fail').style.display='block'};
+    document.getElementById('main-css').onerror = function () {
+      document.getElementById('css-fail').style.display = 'block';
+    };
   </script>
   <script src="content.js"></script>
   <script src="app.js"></script>

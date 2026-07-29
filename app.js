@@ -95,7 +95,7 @@ function awardVirtualCert(quizId, score, title) {
       score,
       date: new Date().toISOString()
     });
-    showToast(`🎓 Virtual Certificate earned: ${title}`, 'success');
+    showToast(`Virtual certificate earned: ${title}`, 'success');
     saveState();
   }
 }
@@ -235,7 +235,7 @@ function renderDashboard() {
   `;
 
   if (state.virtualCerts.length) {
-    html += `<div class="card"><div class="card-title">🎓 Virtual Certificates</div><div>`;
+    html += `<div class="card"><div class="card-title">Virtual Certificates</div><div>`;
     state.virtualCerts.forEach(c => {
       html += `<span class="cert-badge">${c.title} (${c.score}%)</span>`;
     });
@@ -250,7 +250,7 @@ function renderDashboard() {
         const unlocked = isModuleUnlocked(i);
         const done = state.completedModules.includes(m.id);
         return `<div class="module-item ${done ? 'completed' : ''} ${!unlocked ? 'locked' : ''}" onclick="${unlocked ? `openModule('${m.id}')` : ''}">
-          <div class="module-num">${done ? '✓' : (i + 1)}</div>
+          <div class="module-num">${done ? '•' : (i + 1)}</div>
           <div class="module-info">
             <h4>${m.title}</h4>
             <p>${m.description}</p>
@@ -272,7 +272,7 @@ function renderModulesSidebar() {
     const active = state.currentModuleId === m.id;
     return `<div class="module-item ${active ? 'active' : ''} ${done ? 'completed' : ''} ${!unlocked ? 'locked' : ''}"
       onclick="${unlocked ? `openModule('${m.id}')` : `showToast('Complete previous module first','error')`}">
-      <div class="module-num">${done ? '✓' : (i + 1)}</div>
+      <div class="module-num">${done ? '•' : (i + 1)}</div>
       <div class="module-info">
         <h4>${m.title}</h4>
         <div class="module-meta">${m.level}</div>
@@ -287,6 +287,7 @@ function openModule(moduleId) {
   currentView = 'module';
   saveState();
   render();
+  requestAnimationFrame(() => window.scrollTo(0, 0));
 }
 
 function openLesson(moduleId, lessonId) {
@@ -320,7 +321,7 @@ function renderModuleView() {
   mod.lessons.forEach((l, idx) => {
     const done = isLessonCompleted(l.id);
     html += `<div class="module-item ${done ? 'completed' : ''}" onclick="openLesson('${mod.id}','${l.id}')">
-      <div class="module-num">${done ? '✓' : (idx + 1)}</div>
+      <div class="module-num">${done ? '•' : (idx + 1)}</div>
       <div class="module-info">
         <h4>${l.title}</h4>
         <div class="module-meta">${l.duration}</div>
@@ -358,7 +359,7 @@ function renderLessonView() {
         <span>${mod.title}</span>
         <span>Lesson ${idx + 1} of ${mod.lessons.length}</span>
         <span>${lesson.duration}</span>
-        ${done ? '<span style="color:var(--success)">✓ Completed</span>' : ''}
+        ${done ? '<span style="color:var(--success)">Completed</span>' : ''}
       </div>
     </div>
     <div class="card lesson-body">${lesson.content}</div>
@@ -466,7 +467,7 @@ function submitQuiz() {
       <h2>${passed ? '🎉 Passed!' : 'Not quite yet'}</h2>
       <div class="quiz-score">${score}%</div>
       <p>${correct} of ${total} correct · Pass mark ${quiz.passScore}%</p>
-      ${score >= 80 ? '<p class="cert-badge" style="margin-top:1rem">🎓 Virtual Certificate awarded</p>' : ''}
+      ${score >= 80 ? '<p class="cert-badge" style="margin-top:1rem">Virtual certificate awarded</p>' : ''}
     </div>
   `;
 
@@ -573,25 +574,37 @@ function renderSettings() {
 function setView(view) {
   if (!view) return;
   currentView = view;
-  // Highlight the correct tab
+  // Clear module context when using top-level tabs
+  if (view === 'dashboard' || view === 'achievements' || view === 'settings') {
+    state.currentModuleId = null;
+    state.currentLessonId = null;
+  }
   document.querySelectorAll('.nav-tab').forEach((tab) => {
-    const isActive = tab.getAttribute('data-view') === view;
-    tab.classList.toggle('active', isActive);
+    tab.classList.toggle('active', tab.getAttribute('data-view') === view);
   });
   render();
-  // Jump to top of content (feels like navigating to a section)
-  try {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    const main = document.querySelector('.app-main');
-    if (main) main.scrollTop = 0;
-    const area = document.getElementById('content-area');
-    if (area) area.scrollTop = 0;
-  } catch (e) {}
+  // Instant jump: content is first in the layout — pin viewport to top
+  requestAnimationFrame(() => {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  });
+}
+
+function updateSidebarVisibility() {
+  const sidebar = document.getElementById('sidebar');
+  if (!sidebar) return;
+  // Hide modules rail on Dashboard / Achievements / Settings so the section is visible immediately
+  const hide = currentView === 'dashboard' || currentView === 'achievements' || currentView === 'settings';
+  sidebar.classList.toggle('hidden-panel', hide);
 }
 
 function render() {
   renderHeader();
-  renderModulesSidebar();
+  updateSidebarVisibility();
+  if (currentView === 'module' || currentView === 'lesson' || currentView === 'quiz') {
+    renderModulesSidebar();
+  }
   if (currentView === 'dashboard') renderDashboard();
   else if (currentView === 'module') renderModuleView();
   else if (currentView === 'lesson') renderLessonView();
